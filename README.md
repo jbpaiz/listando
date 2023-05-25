@@ -1,5 +1,9 @@
 # listanDo
 
+## Protótipo
+
+https://www.figma.com/file/jUcpVtq2nlvaouh6gXbzCK/listando?type=design&node-id=46%3A43&t=742SZySx5nBEfi5p-1
+
 ## Checklist
 
 - [x] Criar o repositório no GitHub com a estrutura do Gitflow, ou seja, branches main e develop.
