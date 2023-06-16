@@ -1,0 +1,21 @@
+<!--<p style="color: #546e7a">
+  I am a very simple card. I am good at containing small bits of
+  information. I am convenient because I require little markup to use
+  effectively2.
+</p>
+
+<p>
+<ul>
+  <li *ngFor="let l of listaComprasProdutos">
+     {{l.concluido}} {{l.produto.descricao}}
+  </li>
+</ul>
+</p> -->
+
+<ul style="color: #546e7a">
+  <li *ngFor="let l of listaComprasProdutos">
+    <i class="material-icons" *ngIf="l.concluido == false">check_box_outline_blank</i>
+    <i class="material-icons" *ngIf="l.concluido == true">checked</i>
+    <span>{{l.produto.descricao}}</span> 
+  </li>
+</ul>
