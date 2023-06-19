@@ -1,29 +1,40 @@
-<div class="container">
-  <div class="row">
-    <div class="col s12 cards-container">
+<!-- Page Layout here -->
+<div class="row">
+  <div class="col s0 m0 l2"></div>
 
-      <!-- Nota para Adicionar Lista usando [routerLink]-->
-      <div class="card" [routerLink]="['/lista-compras']" id="nova-lista">
-        <div class="card-content">
-          <span class="card-title" style="color: #3949ab">Nova Lista<i class="material-icons left">add</i></span>
+  <!-- Cards container <div class="col s12 m12 l8"-->
+  <div class="col s12 m12 l8">
+
+    <h4>Listas de Compras</h4>
+    
+    <div class="row">
+
+      <!-- Notas Cadastradas -->
+      <div class="col s12 m6 l4" *ngFor="let l of this.listasCompras">
+        
+        <div class="card" >
+          <div class="card-content">
+            <span class="card-title" style="color: #3949ab">{{l.listaComprasDescricao}}</span>
+
+            <!-- Componente Filho usando o @Input -->
+            <app-listas-compras-det-prod #listaComprasProdutos [listaComprasProdutos]="l.listaComprasProdutos">
+            </app-listas-compras-det-prod>
+          </div>
+
+          <!-- Navegação usando router.navigate e parâmetros de rotas-->
+          <div class="card-action">
+            <a (click)="onClickItem(l.listaCompras)">Editar</a>
+          </div>
         </div>
       </div>
 
-      <!-- Notas Cadastradas -->
-      <div class="card" *ngFor="let l of this.listasCompras">
-        <div class="card-content">
-          <span class="card-title" style="color: #3949ab">{{l.listaComprasDescricao}}</span>
-
-          <!-- Componente Filho usando o @Input -->
-          <app-listas-compras-det-prod #listaComprasProdutos [listaComprasProdutos]="l.listaComprasProdutos">
-          </app-listas-compras-det-prod>
+      <!-- Nota para Adicionar Lista usando [routerLink]-->
+      <div class="col s12 m6 l4">
+        <div class="card" [routerLink]="['/lista-compras']" id="nova-lista">
+          <div class="card-content">
+            <span id="nova-lista-texto" class="card-title" style="color: #3949ab">Nova Lista<i class="material-icons left">add</i></span>
+          </div>
         </div>
-
-        <!-- Navegação usando router.navigate e parâmetros de rotas-->
-        <div class="card-action">
-          <a (click)="onClickItem(l.listaCompras)">Editar</a>
-        </div>
-
       </div>
 
     </div>

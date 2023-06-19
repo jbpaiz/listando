@@ -1,44 +1,155 @@
 <div class="container contact">
+  <div class="row"></div>
   <div class="row">
-  </div>
-  <div class="row">
-
     <div class="col s12 cards-container">
+      <form class="col s12" #form="ngForm" (submit)="onSubmit()">
+        <div class="card">
+          <div class="card-content white-text">
+            <div class="row">
+              <div class="col s6 cards-container">
+                <span class="card-title">Cadastro de produtos</span>
+              </div>
+              <div class="col s6 cards-container">
+                <div class="red-text right" *ngIf="this.alterando == true">
+                  Alterando
+                </div>
+              </div>
+            </div>
 
-      <div class="card blue-grey darken-1">
+            <!-- descrição do produto -->
+            <div class="input-field col s12">
+              <input
+                id="produto-descricao"
+                name="produto-descricao"
+                type="text"
+                class="validate"
+                [(ngModel)]="this.produto.descricao"
+                pattern="^[A-Z].{3,}$"
+                #descricao="ngModel"
+                required
+              />
+              <label for="produto-descricao" class="active">Descrição</label>
+              <span
+                class="helper-text"
+                data-error="Descrição inválida"
+                data-success="Descrição válida!"
+              ></span>
+            </div>
 
-        <div class="card-content white-text">
+            <!-- Campo Quantidade -->
+            <div class="input-field col s6">
+              <input
+                id="produto-quantidade"
+                name="produto-quantidade"
+                type="text"
+                class="validate"
+                [(ngModel)]="this.produto.quantidadePadrao"
+                pattern="^[0-9]*\.[0-9]{3}$"
+                #quantidade="ngModel"
+                required
+              />
+              <label for="produto-quantidade" class="active">Quantidade</label>
+              <div
+                class="red-text"
+                [hidden]="quantidade.valid || quantidade.untouched"
+              >
+                Informe a quantidade com 3 casas decimais.
+              </div>
+              <span
+                class="helper-text"
+                data-error="Quantidade inválida"
+                data-success="Quantidade válida!"
+              ></span>
+            </div>
 
-          <span class="card-title">Cadastro de produtos</span>
+            <!-- Campo Undidade de Medida -->
+            <div class="row">
+              <div class="input-field col s6">
+                <label for="select-unidade-medida" class="active"
+                  >Unidade de Medida</label
+                >
 
-          <div class='row'>
-            <div class='input-field col s12'>
-              <input type='text' name='produto-descricao' id='produto-descricao' />
-              <label for='produto-descricao'>Descrição</label>
+                <select
+                  id="select-unidade-medida"
+                  name="select-unidade-medida"
+                  [(ngModel)]="produto.unidadeMedida"
+                  #unidadeMedida="ngModel"
+                  #unidadeMedidaSelect
+                  required
+                >
+                  <option [ngValue]="{}" disabled>Selecione</option>
+                  <option *ngFor="let s of unidadeMedidas" [ngValue]="s">
+                    {{ s }}
+                  </option>
+                </select>
+
+                <div
+                  class="red-text"
+                  [hidden]="unidadeMedida.valid || unidadeMedida.untouched"
+                >
+                  Informe a Unidade de Medida.
+                </div>
+                <div
+                  class="red-text"
+                  *ngIf="unidadeMedida.errors?.['required'] && unidadeMedida.touched"
+                >
+                  Por favor, o nome completo é obrigatório.
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="row">
-            <div class="input-field col s6">
-              <input id="produto-quantidade" type="number">
-              <label for="produto-quantidade">Quantidade</label>
-            </div>
-
-            <div class="input-field col s6">
-              <select>
-                <option value="" selected>Selecione</option>
-                <option value="UN">UN</option>
-                <option value="KG">KG</option>
-                <option value="CX">CX</option>
-              </select>
-              <label>Unidade de Medida</label>
-            </div>
+          <!--Botões-->
+          <div class="card-action">
+            <button
+              class="btn waves-effect waves-light #3949ab indigo"
+              type="submit"
+              [disabled]="!form.valid"
+            >
+              Salvar
+              <i class="material-icons right">send</i>
+            </button>
+            <a style="margin-left: 15px" (click)="limpar()">Limpar</a>
           </div>
-
         </div>
-        <div class="card-action">
-          <a>Editar</a>
-          <a [routerLink]="['/lista-compras', 1]">This is a link</a>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col m12" style="color: #546e7a">
+      <h5>Produtos Cadastrados</h5>
+      <!-- Produtos Cadastrados-->
+      <table class="highlight" *ngIf="produtos && produtos!.length > 0">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let p of produtos">
+            <td>{{ p.id | number }}</td>
+            <td>{{ p.descricao | titlecase }}</td>
+            <td>{{ p.quantidadePadrao | number: '0.3-3'}} {{ p.unidadeMedida | uppercase }}
+            </td>
+            <td class="right">
+              <a><i class="material-icons blue-grey-text" (click)="onEdit(p)">edit</i></a>
+              <a><i class="material-icons blue-grey-text" (click)="onDelete(p)">delete</i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="!produtos || produtos!.length == 0">
+        <div class="row"></div>
+        <div class="row">
+          <div class="center-align">
+            <span class="col s12 flow-text">Nenhum produto cadastrado</span>
+          </div>
         </div>
       </div>
     </div>

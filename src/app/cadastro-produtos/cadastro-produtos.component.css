@@ -2,8 +2,8 @@
   background: #fff !important;
 }
 
-.card-title {
-  color: #3949ab !important;
+.card-content {
+    color: #546e7a !important;
 }
 
 .input-field input[type=date]:focus+label,
@@ -23,3 +23,6 @@
   box-shadow: none;
 }
 
+#icones-p {
+  color: #546e7a !important
+}
