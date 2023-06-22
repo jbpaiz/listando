@@ -5,10 +5,17 @@
         <span class="card-cabecalho-texto">{{
           this.listaCompras.listaComprasDescricao
         }}</span>
-        <i class="material-icons right">edit</i>
       </div>
 
-      <div class="row s2" id="card-corpo">
+      <div
+        style="margin: 15px"
+        class="red-text left"
+        *ngIf="this.alterandoLista == true"
+      >
+        Alterando
+      </div>
+
+      <div id="card-corpo">
         <form class="col s12">
           <div class="row">
             <div class="input-field col s12">
@@ -24,44 +31,88 @@
             </div>
           </div>
 
-          <table>
+          <table class="table">
             <thead>
               <tr>
-                <th data-field="td-date"></th>
+                <th data-field="td-type"></th>
                 <th data-field="td-type">Descricao</th>
-                <th style="text-align: center;" data-field="td-value">Quantidade</th>
+                <th style="text-align: center" data-field="td-value">
+                  Quantidade
+                </th>
                 <th data-field="td-value"></th>
               </tr>
             </thead>
-
             <tbody>
-              <tr *ngFor="let t of this.listaCompras.listaComprasProdutos">
-                <td>
-                  <p>
-                    <label>
-                      <input type="checkbox" [checked]="t.concluido" (click)="this.onCkeckBoxClick(t.produto)" />
-                      <span></span>
-                    </label>
-                  </p>
+              <tr *ngFor="let n of listaCompras.listaComprasProdutos">
+                <th scope="row" style="text-align: center">
+                  <label>
+                    <input
+                      name="check-box-concluido"
+                      type="checkbox"
+                      [checked]="n.concluido"
+                      (change)="n.concluido = !n.concluido"/>
+                    <span></span>
+                  </label>
+                </th>
+                <td>{{ n.produto.descricao | uppercase }}</td>
+                <td style="text-align: center">
+                  {{ n.quantidade | number : "1.3-3" }}
+                  {{ n.produto.unidadeMedida | uppercase }}
                 </td>
-                <td>{{ t.produto.descricao | uppercase }}</td>
-                <td style="text-align: center;">{{ t.quantidade |  number: '1.3-8' }}</td>
-                <td><i class="material-icons">delete</i></td>
+                <td>
+                  <i class="material-icons" (click)="removerProduto(n)"
+                    >delete</i
+                  >
+                </td>
               </tr>
             </tbody>
           </table>
 
-          <button
-            style="margin-left: 10px"
-            class="btn waves-effect #3949ab indigo"
-            type="button"
-            (click)="this.onButtonClick()"
+          <!-- Label apresentado quando não tem produtos selecionados -->
+          <div
+            *ngIf="
+              !this.listaCompras.listaComprasProdutos ||
+              this.listaCompras.listaComprasProdutos!.length == 0
+            "
           >
-            Salvar
-            <i class="material-icons right">check</i>
-          </button>
+            <div class="row"></div>
+            <div class="row" style="color: #546e7a">
+              <div class="center-align">
+                <span class="col s12 flow-text">Selecione os produtos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botões de Ação -->
+          <div class="card-action">
+            <button
+              style="margin-top: 15px"
+              class="btn waves-effect waves-light #3949ab indigo"
+              type="submit"
+              (click)="this.onButtonClick()"
+            >
+              Salvar
+              <i class="material-icons right">send</i>
+            </button>
+
+            <button
+              *ngIf="this.alterandoLista"
+              style="margin-top: 15px"
+              class="btn waves-effect waves-light #3949ab indigo right"
+              type="submit"
+              (click)="this.onDelete(listaCompras)"
+            >
+              Remover
+              <i class="material-icons right">delete</i>
+            </button>
+          </div>
         </form>
       </div>
     </div>
   </div>
+
+  <!-- Produtos Cadastrados - Lista para Adicionar -->
+  <app-produto-selecionar
+    (produtoSelecionado)="adicionarProdutoSelecionado($event)"
+  ></app-produto-selecionar>
 </div>

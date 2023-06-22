@@ -10,6 +10,7 @@ import { ListasComprasComponent } from './listas-compras/listas-compras.componen
 import { CadastroProdutosComponent } from './cadastro-produtos/cadastro-produtos.component';
 import { ListasComprasDetProdComponent } from './listas-compras-det-prod/listas-compras-det-prod.component';
 import { ProdutoSelecionarComponent } from './produto-selecionar/produto-selecionar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProdutoSelecionarComponent } from './produto-selecionar/produto-selecio
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
