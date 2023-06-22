@@ -1,13 +1,15 @@
 import { Produto } from "./produto";
 
 export class ListaComprasProduto {
-  listaCompras: number;
+  listaComprasId: number;
+  id: number;
   produto: Produto;
   concluido: boolean;
   quantidade: number;
 
-  constructor(listaCompras: number, produto: Produto, concluido: boolean, quantidade: number) {
-    this.listaCompras = listaCompras;
+  constructor(listaComprasId: number, listaCompras: number, produto: Produto, concluido: boolean, quantidade: number) {
+    this.listaComprasId = listaComprasId;
+    this.id = listaCompras;
     this.produto = produto;
     this.concluido = concluido;
     this.quantidade = quantidade;

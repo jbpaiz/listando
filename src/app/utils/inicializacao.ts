@@ -1,4 +1,3 @@
-import { Produto } from '../model/produto';
 import { Constantes } from './constantes';
 
 export class Shared {
@@ -10,5 +9,6 @@ export class Shared {
     }
 
     localStorage.setItem(Constantes.PRODUTOS_CADASTRADOS_KEY, JSON.stringify([]));
+    localStorage.setItem(Constantes.LISTA_COMPRAS, JSON.stringify([]));
   }
 }

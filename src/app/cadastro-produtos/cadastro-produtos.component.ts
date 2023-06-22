@@ -3,6 +3,7 @@ import { ProdutosCadastradosService } from './cadastro-produtos.service';
 import { Shared } from '../utils/inicializacao';
 import { Produto } from '../model/produto';
 import { FormBuilder, NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cadastro-produtos',
@@ -10,7 +11,6 @@ import { FormBuilder, NgForm } from '@angular/forms';
   styleUrls: ['./cadastro-produtos.component.css'],
 })
 export class CadastroProdutosComponent implements OnInit {
-
   @ViewChild('form') form!: NgForm;
   @ViewChild('unidadeMedidas') unidadeMedidasSelect!: ElementRef;
 
@@ -21,9 +21,9 @@ export class CadastroProdutosComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private produtosService: ProdutosCadastradosService
-  ) {
-  }
+    private produtosService: ProdutosCadastradosService,
+    private http: HttpClient
+  ) {}
 
   ngAfterViewInit() {
     var elems = document.querySelectorAll('select');
@@ -33,33 +33,47 @@ export class CadastroProdutosComponent implements OnInit {
   ngOnInit(): void {
     Shared.initializeWebStorage();
     this.produto = new Produto(0, '');
-    this.produtos = this.produtosService.getProdutos();
+    this.getProdutos();
   }
 
+  // Evento submit do formulário
   onSubmit() {
-
-    if (this.produto.id <= 0) {
-      this.produto.id = this.produtosService.idNovoCarregar();
-    }
-
-    if (!this.produtosService.produtoExiste(this.produto.id)) {
-      this.produtosService.salvar(this.produto);
-    } else {
-      this.produtosService.atualizar(this.produto);
-    }
-
     if (this.alterando) {
-      alert('Cadastro alterado com sucesso!')
+      this.produtosService
+        .alterar(this.produto)
+        .then((response) => {
+          console.log('Produto atualizado:', response);
+          M.toast({
+            html: `Produto atualizado: ${response.id} ${response.descricao}`,
+          });
+        })
+        .catch((error) => {
+          console.error('Erro ao alterar o produto:', error);
+        });
     } else {
-      alert('Cadastro realizado com sucesso!')
+      this.produtosService
+        .salvar(this.produto)
+        .then((response) => {
+          console.log('Produto criado:', response);
+          M.toast({
+            html: `Produto criado: ${response.id} ${response.descricao}`,
+          });
+        })
+        .catch((error) => {
+          console.error('Erro ao criar o produto:', error);
+        });
     }
 
-    this.limpar()
+    this.limpar();
 
+    // Tempo para atualizar a tela
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 1000);
   }
 
+  // Carrega os campos para editar
   onEdit(produto: Produto) {
-
     this.alterando = true;
 
     let produtoClone: Produto = new Produto(produto.id, produto.descricao);
@@ -69,31 +83,59 @@ export class CadastroProdutosComponent implements OnInit {
     this.produto = produtoClone;
 
     setTimeout(() => {
-      //M.FormSelect.init(this.unidadeMedidasSelect.nativeElement)
-      this.ngAfterViewInit()
+      this.ngAfterViewInit();
     }, 100);
-
   }
 
+  // Delete
   onDelete(produto: Produto) {
-
-    if (!window.confirm('Você tem certeza que deseja remover ' + produto.descricao)) {
+    if (
+      !window.confirm(
+        'Você tem certeza que deseja remover ' + produto.descricao
+      )
+    ) {
       return;
     }
 
-    this.produtosService.deletar(produto.id);
-    this.produtos = this.produtosService.getProdutos();
+    // Usa o método deletar
+    this.produtosService
+      .deletar(produto.id)
+      .then((response) => {
+        console.log('Consulta ao cadastro com sucesso');
+        M.toast({
+          html: `Produto removido com sucesso!`,
+        });
+      })
+      .catch((error) => {
+        console.error('Erro ao carregar produtos cadastrados:', error);
+      });
+
+    // Tempo para atualizar o JSON
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 1000);
   }
 
-  novoIdCarregar() {
-    return;
+  // Atualiza a lisa de produtos cadastrados
+  getProdutos() {
+    this.produtos = [];
+
+    this.produtosService
+      .getProdutos()
+      .then((response) => {
+        console.log('Consulta ao cadastro com sucesso');
+        this.produtos = response;
+      })
+      .catch((error) => {
+        console.error('Erro ao carregar produtos cadastrados:', error);
+      });
   }
 
-  limpar(){
+  //limpa os campos do formulário
+  limpar() {
     this.form.reset();
     this.produto = new Produto(0, '');
-    this.produtos = this.produtosService.getProdutos();
+    this.getProdutos();
     this.alterando = false;
   }
-
 }
