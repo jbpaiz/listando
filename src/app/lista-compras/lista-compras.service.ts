@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { WebStorageUtil } from 'src/app/utils/web-storage-util';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ListaCompras } from '../model/lista-compras';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class ListaComprasService {
     );
   }
 
+  /* Salvar a lista no Web Storage */
   salvarWS(listaCompras: ListaCompras) {
     this.listasCompras = WebStorageUtil.get(
       Constantes.LISTA_COMPRAS
@@ -33,10 +35,12 @@ export class ListaComprasService {
     );
   }
 
+  /* Salvar a lista no Json Server usando Promisse */
   salvar(listaCompras: any): Promise<any> {
     return this.http.post(this.url, listaCompras).toPromise();
   }
 
+  /* Salvar a lista no Json Server usando Promisse */
   alterarWS(listaCompras: ListaCompras) {
     this.listasCompras = WebStorageUtil.get(
       Constantes.LISTA_COMPRAS
@@ -49,6 +53,7 @@ export class ListaComprasService {
     return this.http.put(this.url+'/'+listaCompras.id, listaCompras).toPromise();
   }
 
+  /* Deleter lista no Web Storage */
   deletarWS(id: number): boolean {
     this.listasCompras = WebStorageUtil.get(
       Constantes.LISTA_COMPRAS
@@ -64,23 +69,17 @@ export class ListaComprasService {
     return true;
   }
 
+  /* Deleter do Json Server usando Promise */
   deletar(id: number): Promise<any> {
     return this.http.delete(this.url+'/'+id).toPromise();
   }
 
-  listaExiste(id: number): boolean {
-    this.listasCompras = WebStorageUtil.get(
-      Constantes.LISTA_COMPRAS
-    );
-
-    for (let p of this.listasCompras) {
-      if (p.id?.valueOf() == id?.valueOf()) {
-        return true;
-      }
-    }
-    return false;
+  /* Deleter do Json Server usando Observable */
+  deletarObserver(id: number): Observable<any> {
+    return this.http.delete(this.url+'/'+id);
   }
 
+  /* Carregar Listas de Compras no Web Storage */
   getListaComprasWS(): ListaCompras[] {
     this.listasCompras = WebStorageUtil.get(
       Constantes.LISTA_COMPRAS
@@ -89,50 +88,19 @@ export class ListaComprasService {
     return this.listasCompras;
   }
 
+  /* Carregar Listas de Compras no Json Server usando Promises */
   getListasCompras(): Promise<any> {
     return this.http.get(this.url).toPromise();
   }
 
-  getListaCompra(id: number): Promise<any> {
-    return this.http.get(this.url + '/' + id).toPromise();
+  /* Carregar Listas de Compras no Json Server usando Observer */
+  getListasComprasObserver(): Observable<ListaCompras[]> {
+    return this.http.get<ListaCompras[]>(`${this.url}`);
   }
 
-  carregarListaCompleta() {
-    /*
-    fetch('http://localhost:3000/listascompras')
-      .then((response) => response.json())
-      .then((listas) => {
-        const listaPromises = listas.map((lista: { id: any; descricao: any; }) => {
-          return fetch(
-            `http://localhost:3000/listascomprasprodutos?listacomprasId=${lista.id}`
-          )
-            .then((response) => response.json())
-            .then((listasProdutos) => {
-              const produtoPromises = listasProdutos.map((listasProduto: { produtoId: any; }) => {
-                return fetch(
-                  `http://localhost:3000/produtos/${listasProduto.produtoId}`
-                )
-                  .then((response) => response.json())
-                  .then((produto) => produto.descricao);
-              });
-              return Promise.all(produtoPromises).then((produtos) => {
-                return {
-                  id: lista.id,
-                  descricao: lista.descricao,
-                  produtos: produtos,
-                };
-              });
-            });
-        });
-        return Promise.all(listaPromises);
-      })
-      .then((listaProdutos) => {
-        console.log(listaProdutos);
-      })
-      .catch((error) => {
-        console.error('Ocorreu um erro:', error);
-      });
-      */
+  /* Carregar UMA LISTA no Json Server usando Promises */
+  getListaCompra(id: number): Promise<any> {
+    return this.http.get(this.url + '/' + id).toPromise();
   }
 
 }

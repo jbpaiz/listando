@@ -47,33 +47,35 @@ export class ListaComprasComponent implements OnInit {
     }
   }
 
+  /* Apagar a lista de compras */
   onDelete(listaCompras: ListaCompras) {
     let listaComprasDescricao = listaCompras.listaComprasDescricao;
 
-    this.listaComprasService
-      .deletar(listaCompras.id)
-      .then((response) => {
+    this.listaComprasService.deletarObserver(listaCompras.id).subscribe(
+      () => {
         console.log(`Lista Removida: ${listaComprasDescricao}`);
+
         M.toast({
           html: `Lista Removida: ${listaComprasDescricao}`,
         });
-      })
-      .catch((error) => {
+
+        this.router.navigate(['/']);
+      },
+      (error) => {
         console.error(
           `Erro ao REMOVER lista de compras: ${listaComprasDescricao}`,
           error
         );
-      });
-
-    this.router.navigate(['/']);
+      }
+    );
   }
 
+  /* Adicionar produtos na lista de compras */
   onButtonClick() {
     if (this.alterandoLista) {
       this.listaComprasService
         .alterar(this.listaCompras)
         .then((response) => {
-          console.log('Produto criado:', response);
           M.toast({
             html: `Lista atualizada: ${response.listaComprasDescricao}`,
           });
@@ -82,43 +84,33 @@ export class ListaComprasComponent implements OnInit {
         })
         .catch((error) => {
           console.error('Erro ao ATUALIZAR lista de compras:', error);
+        })
+        .finally(() => {
+          this.router.navigate(['/']);
         });
     } else {
       this.listaComprasService
         .salvar(this.listaCompras)
         .then((response) => {
-          console.log('Produto criado:', response);
           M.toast({
             html: `Lista gravada: ${response.listaComprasDescricao}`,
           });
+
+          this.router.navigate(['/']);
         })
-        .catch((error) => {
-          console.error('Erro ao GRAVAR lista de compras:', error);
+        .finally(() => {
+          this.router.navigate(['/']);
         });
     }
-
-    // Tempo para atualizar a tela
-    setTimeout(() => {
-      this.router.navigate(['/']);
-    }, 1000);
-
   }
 
-  onCkeckBoxClick(produto: ListaComprasProduto) {}
-
-  removerProduto(p: ListaComprasProduto) {
-    this.listaCompras.listaComprasProdutos =
-      this.listaCompras.listaComprasProdutos.filter(
-        (x) => x.produto.id != p.produto.id
-      );
-  }
-
+  /* Event Binding */
   onEnterKey() {
     this.onButtonClick();
   }
 
+  /* Adicionar produtos na lista de compras */
   adicionarProdutoSelecionado(produto: Produto) {
-    console.log(this.listaCompras);
     if (
       this.listaCompras.listaComprasProdutos.find(
         (element) => element.produto.id == produto.id
@@ -132,11 +124,20 @@ export class ListaComprasComponent implements OnInit {
 
     let p = new ListaComprasProduto(
       this.listaCompras.id,
-      1,
+      produto.id,
       produto,
       false,
       produto.quantidadePadrao
     );
+
     this.listaCompras.listaComprasProdutos.push(p);
+  }
+
+  /* Remove o produto da lista */
+  removerProduto(p: ListaComprasProduto) {
+    this.listaCompras.listaComprasProdutos =
+      this.listaCompras.listaComprasProdutos.filter(
+        (x) => x.produto.id != p.produto.id
+      );
   }
 }
