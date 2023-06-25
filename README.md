@@ -1,4 +1,13 @@
-# listanDo
+# Listando
+
+## Endereço de Deploy
+
+#### https://jbpaiz.github.io/listando/
+Nesse deploy estou consumindo uma api que desenvolvi e hospedei, a api está rodando o JSON Server.
+Endereço da api https://listando-dados.up.railway.app/
+
+#### https://listandoo.netlify.app/
+Nesse deploy é necessário executar o JSON Server na porta 3000.
 
 ## Protótipo
 
@@ -28,4 +37,4 @@ https://www.figma.com/file/jUcpVtq2nlvaouh6gXbzCK/listando?type=design&node-id=4
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [x] Usar a diretiva ngIf
 - [x] Formatar a apresentação de dados com Pipes.
-- [ ] Build e deploy da aplicação.
+- [x] Build e deploy da aplicação.

@@ -9,7 +9,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ProdutosCadastradosService {
   produtosCadastrados!: Produto[];
-  url = 'http://localhost:3000/produtos'; // URL do JSON Server na porta 3000
+  //url = 'http://localhost:3000/produtos'; // URL do JSON Server na porta 3000
+  url = 'https://listando-dados.up.railway.app/produtos'; // URL do JSON Server na porta 3000
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

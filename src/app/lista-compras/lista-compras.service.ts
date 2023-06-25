@@ -11,7 +11,8 @@ import { Observable } from 'rxjs';
 export class ListaComprasService {
 
   listasCompras!: ListaCompras[];
-  url = 'http://localhost:3000/listascompras'; // URL do JSON Server na porta 3000
+  //url = 'http://localhost:3000/listascompras'; // URL do JSON Server na porta 3000
+  url = 'https://listando-dados.up.railway.app/listascompras'; // URL do JSON Server na porta 3000
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
