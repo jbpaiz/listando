@@ -1,0 +1,228 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "descricao": "Macarrão",
+      "quantidadePadrao": "1.000",
+      "unidadeMedida": "KG"
+    },
+    {
+      "id": 2,
+      "descricao": "Arroz",
+      "quantidadePadrao": "5.000",
+      "unidadeMedida": "KG"
+    },
+    {
+      "id": 3,
+      "descricao": "Carne",
+      "quantidadePadrao": "1.000",
+      "unidadeMedida": "KG"
+    },
+    {
+      "id": 4,
+      "descricao": "Refrigerante",
+      "quantidadePadrao": "1.000",
+      "unidadeMedida": "UN"
+    },
+    {
+      "id": 5,
+      "descricao": "Pão frances",
+      "quantidadePadrao": "12.000",
+      "unidadeMedida": "UN"
+    },
+    {
+      "id": 6,
+      "descricao": "Repolho branco",
+      "quantidadePadrao": "1.000",
+      "unidadeMedida": "UN"
+    },
+    {
+      "id": 7,
+      "descricao": "Torneira de cozinha",
+      "quantidadePadrao": "1.000",
+      "unidadeMedida": "UN"
+    },
+    {
+      "id": 8,
+      "descricao": "Vassoura",
+      "quantidadePadrao": "1.000",
+      "unidadeMedida": "UN"
+    },
+    {
+      "id": 9,
+      "descricao": "Pilhas AA",
+      "quantidadePadrao": "1.000",
+      "unidadeMedida": "UN"
+    }
+  ],
+  "listascompras": [
+    {
+      "id": 1,
+      "listaComprasDescricao": "Compras para Mercado",
+      "listaComprasProdutos": [
+        {
+          "listaComprasId": 0,
+          "id": 1,
+          "produto": {
+            "id": 1,
+            "descricao": "Macarrão",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "KG"
+          },
+          "concluido": true,
+          "quantidade": "1.000"
+        },
+        {
+          "listaComprasId": 1,
+          "id": 1,
+          "produto": {
+            "id": 3,
+            "descricao": "Carne",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "KG"
+          },
+          "concluido": false,
+          "quantidade": "1.000"
+        },
+        {
+          "listaComprasId": 1,
+          "id": 1,
+          "produto": {
+            "id": 2,
+            "descricao": "Arroz",
+            "quantidadePadrao": "5.000",
+            "unidadeMedida": "KG"
+          },
+          "concluido": true,
+          "quantidade": "5.000"
+        },
+        {
+          "listaComprasId": 1,
+          "id": 1,
+          "produto": {
+            "id": 4,
+            "descricao": "Refrigerante",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "UN"
+          },
+          "concluido": false,
+          "quantidade": "1.000"
+        },
+        {
+          "listaComprasId": 1,
+          "id": 1,
+          "produto": {
+            "id": 5,
+            "descricao": "Pão frances",
+            "quantidadePadrao": "12.000",
+            "unidadeMedida": "UN"
+          },
+          "concluido": true,
+          "quantidade": "12.000"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "listaComprasDescricao": "Compras para a Casa",
+      "listaComprasProdutos": [
+        {
+          "listaComprasId": 2,
+          "id": 1,
+          "produto": {
+            "id": 7,
+            "descricao": "Torneira de cozinha",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "UN"
+          },
+          "concluido": false,
+          "quantidade": "1.000"
+        },
+        {
+          "listaComprasId": 2,
+          "id": 1,
+          "produto": {
+            "id": 9,
+            "descricao": "Pilhas AA",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "UN"
+          },
+          "concluido": false,
+          "quantidade": "1.000"
+        },
+        {
+          "listaComprasId": 2,
+          "id": 1,
+          "produto": {
+            "id": 2,
+            "descricao": "Arroz",
+            "quantidadePadrao": "5.000",
+            "unidadeMedida": "KG"
+          },
+          "concluido": false,
+          "quantidade": "5.000"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "listaComprasDescricao": "Teste para Apagar",
+      "listaComprasProdutos": [
+        {
+          "listaComprasId": 0,
+          "id": 1,
+          "produto": {
+            "id": 1,
+            "descricao": "Macarrão",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "KG"
+          },
+          "concluido": true,
+          "quantidade": "1.000"
+        },
+        {
+          "listaComprasId": 0,
+          "id": 1,
+          "produto": {
+            "id": 8,
+            "descricao": "Vassoura",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "UN"
+          },
+          "concluido": false,
+          "quantidade": "1.000"
+        },
+        {
+          "listaComprasId": 0,
+          "id": 1,
+          "produto": {
+            "id": 6,
+            "descricao": "Repolho branco",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "UN"
+          },
+          "concluido": true,
+          "quantidade": "1.000"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "listaComprasDescricao": "Nova Lista de Compras",
+      "listaComprasProdutos": [
+        {
+          "listaComprasId": 0,
+          "id": 1,
+          "produto": {
+            "id": 1,
+            "descricao": "Macarrão",
+            "quantidadePadrao": "1.000",
+            "unidadeMedida": "KG"
+          },
+          "concluido": true,
+          "quantidade": "1.000"
+        }
+      ]
+    }
+  ]
+}

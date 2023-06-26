@@ -1,0 +1,32 @@
+a:link,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+.brand-logo {
+  height: 100%;
+  display: flexbox !important;
+
+  .my-logo {
+    height: 100%;
+  }
+}
+
+.logo-listando {
+
+  font-size: clamp(1em, 1em + 1vw, 1.5em);
+  margin-left: 10px;
+  font-family: 'Raleway', sans-serif;
+
+  .logo-listan {
+    font-weight: 700;
+  }
+
+  .logo-do {
+    font-weight: 100;
+  }
+
+}
+

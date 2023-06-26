@@ -1,0 +1,10 @@
+.card-info, .card__meta a {
+  display: inline-flex;
+  vertical-align: middle;
+  line-height: 2;
+  font-size: 1rem;
+}
+
+.card .card-content .card-title {
+  line-height: 34px;
+}

@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <tr></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let l of listaComprasProdutos" style="color: #546e7a">
+      <td style="max-width: 1.2rem;">
+        <i class="material-icons" *ngIf="l.concluido == false">check_box_outline_blank</i>
+        <i class="material-icons" *ngIf="l.concluido == true">checked</i>
+      </td>
+      <td><span class="left">{{l.produto.descricao}}</span> </td>
+    </tr>
+  </tbody>
+</table>
