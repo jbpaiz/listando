@@ -32,9 +32,4 @@ https://www.figma.com/file/jUcpVtq2nlvaouh6gXbzCK/listando?type=design&node-id=4
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [x] Usar a diretiva ngIf
 - [x] Formatar a apresentação de dados com Pipes.
-- [x] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
-- [x] Cadastrar uma entidade no JSON Server.
-- [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
-- [x] Usar a diretiva ngIf
-- [x] Formatar a apresentação de dados com Pipes.
 - [x] Build e deploy da aplicação.
