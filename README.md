@@ -1,4 +1,5 @@
 # Listando
+Aplicação para controle de listas de compras.
 
 ## Endereço de Deploy
 
@@ -8,6 +9,9 @@ Endereço da api https://listando-dados.up.railway.app/
 
 #### https://listandoo.netlify.app/
 Nesse deploy é necessário executar o JSON Server na porta 3000.
+
+## Apresentação do Trabalho
+https://www.youtube.com/watch?v=6OFrW-JKqxU
 
 ## Protótipo
 
